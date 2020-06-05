@@ -36,7 +36,7 @@ export default class App extends React.Component {
     fetch(REST_URL + '/search.php?ing=' + ings)
       .then(response => response.text())
       .then(text => {
-        console.log(text);
+        console.log(JSON.parse(text));
       });
   }
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Tempo de geração: 05-Jun-2020 às 15:14
+-- Tempo de geração: 05-Jun-2020 às 16:46
 -- Versão do servidor: 10.4.6-MariaDB
 -- versão do PHP: 7.3.9
 
@@ -25,56 +25,26 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `ingredientes`
---
-
-CREATE TABLE `ingredientes` (
-  `id` int(11) NOT NULL,
-  `name` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Extraindo dados da tabela `ingredientes`
---
-
-INSERT INTO `ingredientes` (`id`, `name`) VALUES
-(5, 'Batatas'),
-(6, 'Oleo'),
-(7, 'Ovos'),
-(8, 'Leite'),
-(9, 'Farinha'),
-(10, 'Bifes'),
-(11, 'Açucar'),
-(12, 'Sal'),
-(13, 'Abacate'),
-(14, 'Arroz'),
-(15, 'Alho Frances'),
-(16, 'Morangos'),
-(17, 'Cebolas'),
-(18, 'Laranja'),
-(19, 'Maracuja');
-
--- --------------------------------------------------------
-
---
 -- Estrutura da tabela `recipes`
 --
 
 CREATE TABLE `recipes` (
   `id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
-  `ingredients` varchar(255) NOT NULL
+  `ingredients` varchar(255) NOT NULL,
+  `page_name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `recipes`
+--
+
+INSERT INTO `recipes` (`id`, `name`, `ingredients`, `page_name`) VALUES
+(2, 'Batatas Fritas', 'batatas|oleo|sal', '0.txt');
 
 --
 -- Índices para tabelas despejadas
 --
-
---
--- Índices para tabela `ingredientes`
---
-ALTER TABLE `ingredientes`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Índices para tabela `recipes`
@@ -87,16 +57,10 @@ ALTER TABLE `recipes`
 --
 
 --
--- AUTO_INCREMENT de tabela `ingredientes`
---
-ALTER TABLE `ingredientes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
-
---
 -- AUTO_INCREMENT de tabela `recipes`
 --
 ALTER TABLE `recipes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
