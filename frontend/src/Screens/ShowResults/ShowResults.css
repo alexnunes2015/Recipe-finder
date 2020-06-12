@@ -1,0 +1,12 @@
+.ShowResultsError{
+    margin-top: 40px;
+}   
+
+.ResultsData{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    top: 60px;
+    overflow-y: auto;
+}

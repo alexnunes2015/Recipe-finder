@@ -7,6 +7,8 @@
     $servername = "127.0.0.1";
     $username = "root";
     $password = "";
+
+    $count=0;
     
 
     $conn = mysqli_connect($servername, $username, $password,"recipefinder");
@@ -34,13 +36,21 @@
         }
 
         if($isPossible){
-            $resultRecipesId=$resultRecipesId."{\"name\":\"".$row[1]."\",\"file\":\"".$row[3]."\"},";
+            $count=$count+1;
+            $resultRecipesId=$resultRecipesId."{\"name\":\"".$row[1]."\",\"id\":\"".$row[3]."\"},";
         }
       }
       mysqli_free_result($result);
     }
+
+    if($count==0){
+      $resultRecipesId="{ \"data\": {} }";
+    }
+    $resultRecipesId=substr($resultRecipesId, 0, -1);
     $resultRecipesId=$resultRecipesId."]}";
-    echo json_encode($resultRecipesId);
+
+    $json_string = json_encode($resultRecipesId, JSON_PRETTY_PRINT);
+    echo $json_string;
     //printf($resultRecipesId);
 
     mysqli_close($conn);

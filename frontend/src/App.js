@@ -3,24 +3,49 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IngredientsSelection from "./Screens/IngredientsSelection/IngredientsSelection";
+import IconButton from '@material-ui/core/IconButton';
+import ArrowBack from '@material-ui/icons/ArrowBack';
+import ShowResults from './Screens/ShowResults/ShowResults';
 import { REST_URL } from './REST_URL';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      ingredientes: ["Batatas", "Oleo", "Ovos", "Leite", "Farinha", "Bifes", "Açucar", "Sal", "Abacate", "Arroz", "Alho Frances"],
+      ingredientes: ["Batatas",
+        "Oleo",
+        "Ovos",
+        "Leite",
+        "Farinha",
+        "Bifes",
+        "Açucar",
+        "Sal",
+        "Abacate",
+        "Arroz",
+        "Alho Frances",
+        "Cebola",
+        "Presunto picado",
+        "Tomate",
+        "Vinho branco",
+        "Azeite"],
       selected: [],
-      currentPage: "select"
+      currentPage: "select",
+      results: undefined
     }
     this.addItem = this.addItem.bind(this);
     this.onSearch = this.onSearch.bind(this);
+    this.onGoBack = this.onGoBack.bind(this);
+  }
+
+  onGoBack() {
+    this.setState({
+      currentPage: "select",
+      selected: [],
+      results: undefined
+    })
   }
 
   onSearch() {
-    this.setState({
-      currentPage: "results"
-    })
     let ings = "";
     let first = true;
     this.state.selected.forEach(element => {
@@ -34,9 +59,20 @@ export default class App extends React.Component {
       }
     });
     fetch(REST_URL + '/search.php?ing=' + ings)
-      .then(response => response.text())
-      .then(text => {
-        console.log(JSON.parse(text));
+      .then(response => response.json())
+      .then(json => {
+        if (json !== "{ \"data\": {} ]}") {
+          let arrToSave = JSON.parse(json).data;
+          this.setState({
+            results: arrToSave,
+            currentPage: "results"
+          });
+        } else {
+          this.setState({
+            results: undefined,
+            currentPage: "results"
+          });
+        }
       });
   }
 
@@ -62,6 +98,13 @@ export default class App extends React.Component {
       <div style={{ flexGrow: 1 }} >
         <AppBar position="static">
           <Toolbar>
+            {
+              this.state.currentPage !== "select" ? (
+                <IconButton onClick={this.onGoBack} edge="start" color="inherit" aria-label="menu">
+                  <ArrowBack />
+                </IconButton>
+              ) : null
+            }
             <Typography variant="h6" style={{ flexGrow: 1 }}>
               Recipe Finder
             </Typography>
@@ -72,6 +115,11 @@ export default class App extends React.Component {
             addItem={this.addItem}
             ingredientes={this.state.ingredientes}
             onSearch={this.onSearch}
+          />
+        ) : null}
+        {this.state.currentPage === "results" ? (
+          <ShowResults
+            results={this.state.results}
           />
         ) : null}
       </div>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Tempo de geração: 05-Jun-2020 às 16:46
+-- Tempo de geração: 12-Jun-2020 às 20:55
 -- Versão do servidor: 10.4.6-MariaDB
 -- versão do PHP: 7.3.9
 
@@ -32,15 +32,15 @@ CREATE TABLE `recipes` (
   `id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
   `ingredients` varchar(255) NOT NULL,
-  `page_name` varchar(255) NOT NULL
+  `recipe_id` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `recipes`
 --
 
-INSERT INTO `recipes` (`id`, `name`, `ingredients`, `page_name`) VALUES
-(2, 'Batatas Fritas', 'batatas|oleo|sal', '0.txt');
+INSERT INTO `recipes` (`id`, `name`, `ingredients`, `recipe_id`) VALUES
+(2, 'Batatas Fritas', 'batatas|oleo|sal', '0');
 
 --
 -- Índices para tabelas despejadas
