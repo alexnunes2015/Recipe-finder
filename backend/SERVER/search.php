@@ -20,13 +20,21 @@
     if ($result = mysqli_query($conn, $sql)) {
       while ($row = mysqli_fetch_row($result)) {
         $ingredientsId=explode("|",$row[2]);
+        $isPossible=false;
 
-        foreach ($inputIngredientsId as $ingId) {
+        foreach ($ingredientsId as $ingId) {
             $ingId=strtolower($ingId);
-            $key = in_array($ingId, $ingredientsId);
+            $key = in_array($ingId, $inputIngredientsId);
             if($key != null){
-                $resultRecipesId=$resultRecipesId."{\"name\":\"".$row[1]."\",\"file\":\"".$row[3]."\"},";
+              $isPossible=true;
+            }else{
+              $isPossible=false;
+              break;
             }
+        }
+
+        if($isPossible){
+            $resultRecipesId=$resultRecipesId."{\"name\":\"".$row[1]."\",\"file\":\"".$row[3]."\"},";
         }
       }
       mysqli_free_result($result);

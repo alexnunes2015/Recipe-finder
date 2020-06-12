@@ -26,10 +26,10 @@ export default class App extends React.Component {
     this.state.selected.forEach(element => {
       if (element !== "") {
         if (first) {
-          ings = element;
+          ings = element.toLowerCase();
           first = false;
         } else {
-          ings = ings + "|" + element;
+          ings = ings + "|" + element.toLowerCase();
         }
       }
     });
