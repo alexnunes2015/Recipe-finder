@@ -7,10 +7,20 @@ import Typography from '@material-ui/core/Typography';
 import { REST_URL } from '../../../REST_URL';
 
 export default class CardRecipe extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.onOpenRecipe = this.onOpenRecipe.bind(this);
+    }
+
+    onOpenRecipe() {
+        this.props.onOpenRecipe(this.props.rid);
+    }
+
     render() {
         return (
             <Card style={{ maxWidth: "95%", minWidth: "95%", float: "left", margin: 10 }}>
-                <CardActionArea>
+                <CardActionArea onClick={this.onOpenRecipe}>
                     <CardMedia
                         style={{ height: 140 }}
                         image={REST_URL + "/DIRECTORY/" + this.props.rid + "/img.jpg"}

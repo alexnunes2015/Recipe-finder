@@ -1,0 +1,12 @@
+.ShowRecipe{
+    position: fixed;
+    left: 0;
+    right: 5px;
+    bottom: 5px;
+    top:60px;
+}
+
+.ShowRecipeFrame{
+    width: 100%;
+    height: 100%;
+}

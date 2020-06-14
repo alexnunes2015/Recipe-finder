@@ -6,6 +6,7 @@ import IngredientsSelection from "./Screens/IngredientsSelection/IngredientsSele
 import IconButton from '@material-ui/core/IconButton';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import ShowResults from './Screens/ShowResults/ShowResults';
+import ShowRecipe from './Screens/ShowRecipe/ShowRecipe';
 import { REST_URL } from './REST_URL';
 
 export default class App extends React.Component {
@@ -30,18 +31,30 @@ export default class App extends React.Component {
         "Azeite"],
       selected: [],
       currentPage: "select",
-      results: undefined
+      results: undefined,
+      currentRecipe: -1
     }
     this.addItem = this.addItem.bind(this);
     this.onSearch = this.onSearch.bind(this);
     this.onGoBack = this.onGoBack.bind(this);
+    this.onOpenRecipe = this.onOpenRecipe.bind(this);
+  }
+
+  onOpenRecipe(id) {
+    this.setState({
+      currentPage: "showRecipe",
+      selected: [],
+      results: undefined,
+      currentRecipe: id
+    })
   }
 
   onGoBack() {
     this.setState({
       currentPage: "select",
       selected: [],
-      results: undefined
+      results: undefined,
+      currentRecipe: -1
     })
   }
 
@@ -120,6 +133,12 @@ export default class App extends React.Component {
         {this.state.currentPage === "results" ? (
           <ShowResults
             results={this.state.results}
+            onOpenRecipe={this.onOpenRecipe}
+          />
+        ) : null}
+        {this.state.currentPage === "showRecipe" ? (
+          <ShowRecipe
+            currentRecipe={this.state.currentRecipe}
           />
         ) : null}
       </div>
